@@ -1,4 +1,3 @@
-// Import the necessary libraries and set up your Africastalking API credentials
 const Africastalking = require('africastalking');
 const apiKey = process.env.AT_API_KEY;
 const username = 'deltabk';

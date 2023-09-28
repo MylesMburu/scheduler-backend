@@ -1,6 +1,8 @@
-// Import the necessary libraries and set up your OpenAI API key
+require('dotenv').config();
+
 const openai = require('openai');
 const apiKey = process.env.OPENAI_API_KEY;
+// console.log(apiKey);
 const openaiClient = new openai({ apiKey });
 
 // Function to generate a schedule using OpenAI GPT-3
@@ -9,10 +11,10 @@ async function generateSchedule(classSchedule, tasks) {
     const prompt = `Generate a schedule for a student with the following class schedule:\n${classSchedule}\n\nTasks to complete:\n${tasks}`;
     
     // Call the OpenAI API to generate the schedule
-    const response = await openaiClient.Completion.create({
-      engine: 'davinci',
+    const response = await openaiClient.completions.create({
+      model: "gpt-3.5-turbo-instruct",
       prompt,
-      max_tokens: 100, // Adjust the max tokens as needed
+      max_tokens: 100, 
     });
 
     // Extract and return the generated schedule from the response
@@ -24,5 +26,4 @@ async function generateSchedule(classSchedule, tasks) {
   }
 }
 
-
-module.exports = { generateSchedule };
+module.exports = { genSchedule: generateSchedule };
