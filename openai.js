@@ -8,8 +8,11 @@ const openaiClient = new openai({ apiKey });
 // Function to generate a schedule using OpenAI GPT-3
 async function generateSchedule(classSchedule, tasks) {
   try {
-    const prompt = `Generate a schedule for a student with the following class schedule:\n${classSchedule}\n\nTasks to complete:\n${tasks}`;
-    
+    const prompt = `Generate a JSON schedule for a student:\n{
+      "classes": ${classSchedule},
+      "tasks": ${tasks}
+    }`;
+        
     // Call the OpenAI API to generate the schedule
     const response = await openaiClient.completions.create({
       model: "gpt-3.5-turbo-instruct",

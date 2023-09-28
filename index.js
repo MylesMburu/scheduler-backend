@@ -6,6 +6,10 @@ const openai  = require('./openai');
 const app = express();
 const port = 3000;
 
+// routers
+const TasksRouter = require('./routes/tasks.route');
+const ScheduleRouter = require('./routes/schedule.route');
+
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -26,11 +30,16 @@ app.post('/api/abc', async (req, res) => {
     console.log(generatedSchedule)
 
     res.json({ message: 'Classes and tasks submitted successfully' });
+
+    const sendScheduleViaSMS = sendScheduleViaSMS(phone, generatedSchedule)
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
+
+app.use('/tasks', TasksRouter);
+app.use('/schedule', ScheduleRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
