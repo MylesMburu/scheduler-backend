@@ -1,6 +1,6 @@
 const Africastalking = require('africastalking');
 const apiKey = process.env.AT_API_KEY;
-const username = 'deltabk';
+const username = 'testprime';
 
 // Create an instance of the Africastalking SMS service
 const sms = Africastalking({
